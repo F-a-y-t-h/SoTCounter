@@ -5,7 +5,7 @@ using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class PartyListOverlay : IDisposable
 {
@@ -14,10 +14,10 @@ public sealed class PartyListOverlay : IDisposable
     private const uint BadgeTextColor   = 0xFFFFFFFF; // white, fully opaque
 
     private readonly IGameGui gameGui;
-    private readonly ProvokeTracker tracker;
+    private readonly SoTTracker tracker;
     private readonly Configuration config;
 
-    public PartyListOverlay(IGameGui gameGui, ProvokeTracker tracker, Configuration config)
+    public PartyListOverlay(IGameGui gameGui, SoTTracker tracker, Configuration config)
     {
         this.gameGui = gameGui;
         this.tracker = tracker;
@@ -51,7 +51,7 @@ public sealed class PartyListOverlay : IDisposable
             ImGuiWindowFlags.NoBringToFrontOnFocus |
             ImGuiWindowFlags.NoFocusOnAppearing;
 
-        if (!ImGui.Begin("##ProvokeCounterOverlay", flags))
+        if (!ImGui.Begin("##SoTCounterOverlay", flags))
         {
             ImGui.End();
             return;
@@ -79,7 +79,7 @@ public sealed class PartyListOverlay : IDisposable
             var padding = new Vector2(3f * scale, 1f * scale);
             var badgeSize = textSize + padding * 2f;
 
-            var badgePos = new Vector2(nodeX - badgeSize.X - 2f * scale, nodeY);
+            var badgePos = new Vector2(16f + nodeX - badgeSize.X - 2f * scale, nodeY);
             var badgeEnd = badgePos + badgeSize;
 
             drawList.AddRect(badgePos, badgeEnd, BadgeBorderColor, 2f);

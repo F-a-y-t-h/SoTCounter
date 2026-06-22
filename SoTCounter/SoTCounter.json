@@ -1,0 +1,8 @@
+{
+  "Author": "Valiice, Dumb Edit by _Fayth",
+  "Name": "Song of Torment Counter",
+  "Punchline": "Counts how many times people use this shitty spell in your party.",
+  "Description": "Displays a counter badge on the party list for each party member who uses Provoke. Resets per zone. Toggle with /sotcounter.",
+  "ApplicableVersion": "any",
+  "Tags": ["party", "blumahe", "sot", "counter", "fun"]
+}

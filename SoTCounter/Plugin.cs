@@ -7,7 +7,7 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class Plugin : IDalamudPlugin
 {
@@ -20,15 +20,15 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] internal static IPluginLog Log { get; private set; } = null!;
     [PluginService] internal static IObjectTable ObjectTable { get; private set; } = null!;
 
-    private const string CommandName = "/provokecounter";
+    private const string CommandName = "/sotcounter";
 
     public Configuration Configuration { get; init; }
 
-    private readonly ProvokeTracker tracker;
+    private readonly SoTTracker tracker;
     private readonly AllTimeStats allTimeStats;
     private readonly ActionEffectHook actionEffectHook;
     private readonly PartyListOverlay overlay;
-    private readonly WindowSystem windowSystem = new("ProvokeCounter");
+    private readonly WindowSystem windowSystem = new("SoTCounter");
     private readonly StatsWindow statsWindow;
     private readonly ConfigWindow configWindow;
 
@@ -36,7 +36,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
 
-        tracker = new ProvokeTracker();
+        tracker = new SoTTracker();
         allTimeStats = new AllTimeStats(PluginInterface);
         actionEffectHook = new ActionEffectHook(tracker, GameInterop);
         overlay = new PartyListOverlay(GameGui, tracker, Configuration);
@@ -48,8 +48,8 @@ public sealed class Plugin : IDalamudPlugin
 
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "Open provoke counter stats. Use 'reset' to clear current zone counts."
-        });
+            HelpMessage = "Open Song of Torment counter stats. Use 'reset' to clear current zone counts."
+		});
 
         PluginInterface.UiBuilder.Draw += UpdateNameCache;
         PluginInterface.UiBuilder.Draw += windowSystem.Draw;
@@ -77,7 +77,7 @@ public sealed class Plugin : IDalamudPlugin
         if (args.Trim().Equals("reset", StringComparison.OrdinalIgnoreCase))
         {
             tracker.Reset();
-            ChatGui.Print("[ProvokeCounter] Zone counts reset.");
+            ChatGui.Print("[SoTCounter] Zone counts reset.");
             return;
         }
 

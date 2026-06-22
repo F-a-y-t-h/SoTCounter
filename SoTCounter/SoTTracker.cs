@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
-public sealed class ProvokeTracker
+public sealed class SoTTracker
 {
     private readonly Dictionary<uint, int> counts = new();
 

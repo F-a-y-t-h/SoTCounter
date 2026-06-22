@@ -1,7 +1,7 @@
 ﻿using Dalamud.Configuration;
 using System;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 [Serializable]
 public class Configuration : IPluginConfiguration

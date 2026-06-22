@@ -2,13 +2,13 @@ using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class ConfigWindow : Window
 {
     private readonly Configuration config;
 
-    public ConfigWindow(Configuration config) : base("Provoke Counter Settings")
+    public ConfigWindow(Configuration config) : base("SoT Counter Settings")
     {
         this.config = config;
         SizeConstraints = new WindowSizeConstraints

@@ -5,16 +5,17 @@ using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class ActionEffectHook : IDisposable
 {
     private const uint ProvokeActionId = 7533;
+	private const uint SoTActionId = 11386;
 
-    private readonly Hook<ActionEffectHandler.Delegates.Receive> hook;
-    private readonly ProvokeTracker tracker;
+	private readonly Hook<ActionEffectHandler.Delegates.Receive> hook;
+    private readonly SoTTracker tracker;
 
-    public unsafe ActionEffectHook(ProvokeTracker tracker, IGameInteropProvider gameInterop)
+    public unsafe ActionEffectHook(SoTTracker tracker, IGameInteropProvider gameInterop)
     {
         this.tracker = tracker;
 
@@ -23,7 +24,7 @@ public sealed class ActionEffectHook : IDisposable
             OnReceiveActionEffect);
         hook.Enable();
 
-        Plugin.Log.Information("[ProvokeCounter] ActionEffectHook enabled.");
+        Plugin.Log.Information("[SoTCounter] ActionEffectHook enabled.");
     }
 
     private unsafe void OnReceiveActionEffect(
@@ -36,7 +37,7 @@ public sealed class ActionEffectHook : IDisposable
     {
         var actionId = header->ActionId;
         hook.Original(casterEntityId, caster, targetPos, header, effects, targetEntityIds);
-        if (actionId != ProvokeActionId) return;
+        if (actionId != SoTActionId) return;
         tracker.Increment(casterEntityId);
     }
 

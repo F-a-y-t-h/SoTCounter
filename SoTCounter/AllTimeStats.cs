@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using Dalamud.Plugin;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class AllTimeStats
 {

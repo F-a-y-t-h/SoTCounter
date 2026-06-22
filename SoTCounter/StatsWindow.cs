@@ -4,16 +4,16 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 
-namespace ProvokeCounter;
+namespace SoTCounter;
 
 public sealed class StatsWindow : Window
 {
-    private readonly ProvokeTracker tracker;
+    private readonly SoTTracker tracker;
     private readonly AllTimeStats allTimeStats;
     private readonly IObjectTable objectTable;
 
-    public StatsWindow(ProvokeTracker tracker, AllTimeStats allTimeStats, IObjectTable objectTable)
-        : base("Provoke Counter")
+    public StatsWindow(SoTTracker tracker, AllTimeStats allTimeStats, IObjectTable objectTable)
+        : base("SoT Counter")
     {
         this.tracker = tracker;
         this.allTimeStats = allTimeStats;
@@ -27,7 +27,7 @@ public sealed class StatsWindow : Window
 
     public override void Draw()
     {
-        if (!ImGui.BeginTabBar("##provokeTabs"))
+        if (!ImGui.BeginTabBar("##sotTabs"))
             return;
 
         if (ImGui.BeginTabItem("This Zone"))
@@ -53,7 +53,7 @@ public sealed class StatsWindow : Window
 
         if (counts.Count == 0)
         {
-            ImGui.TextDisabled("No provokes recorded this zone.");
+            ImGui.TextDisabled("No Song of Torment recorded this zone.");
         }
         else
         {
